@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         direction = findViewById(R.id.tv_direction);
 
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         rotationVector = new RotationVector(sensorManager);
 
