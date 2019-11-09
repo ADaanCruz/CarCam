@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1026064238159",
+    "firebase_url": "https://precise-reality-247217.firebaseio.com",
+    "project_id": "precise-reality-247217",
+    "storage_bucket": "precise-reality-247217.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026064238159:android:17d9001bc9022938a4cc3a",
+        "android_client_info": {
+          "package_name": "com.example.carcam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026064238159-sk43pcs9ulqg5ese2cb3mdiddtqfmo06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carcam",
+            "certificate_hash": "ceec2fb35cb9b9234ea8d55014c4b8e40959917f"
+          }
+        },
+        {
+          "client_id": "1026064238159-3kr1agmjfl5ru4qdq81ebl6o1vp1g1j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIjVtRjqdmAeouC5TgFD6ZQuxHxxWiem0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026064238159-3kr1agmjfl5ru4qdq81ebl6o1vp1g1j2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
