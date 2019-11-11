@@ -3,4 +3,9 @@
     <string name="tv_direction">Direction</string>
     <string name="lbl_right">Right</string>
     <string name="lbl_left">Left</string>
+    <string name="btn_left">Izquierda</string>
+    <string name="btn_right">Derecha</string>
+    <string name="btn_ahead">Adelante</string>
+    <string name="btn_back">Atras</string>
+
 </resources>

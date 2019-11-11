@@ -110,7 +110,7 @@ public class MainInterface extends AppCompatActivity {
         }
     }
 
-    private class ConnectedThread extends Thread {
+    public class ConnectedThread extends Thread {
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
 
