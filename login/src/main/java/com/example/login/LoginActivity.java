@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrecta.",
                                     Toast.LENGTH_SHORT).show();
