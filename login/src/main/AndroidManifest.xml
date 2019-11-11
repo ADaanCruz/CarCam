@@ -5,8 +5,12 @@
     <application>
         <activity
             android:name=".LoginActivity"
-            android:label="hkjhkj"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="Iniciar sesión CarCam"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

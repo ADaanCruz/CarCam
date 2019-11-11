@@ -18,14 +18,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    EditText edtpass, edtemail;
+    String email, password;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
+
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,8 +44,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
+        edtemail = findViewById(R.id.email);
+        edtpass = findViewById(R.id.password);
 
-        this.singIn("lourdesvega21@hotmail.com","123456");
+        Button btnIng = findViewById(R.id.ingresarlogin);
+        btnIng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                email = edtemail.getText().toString();
+                password = edtpass.getText().toString();
+                if(email.equals("")||password.equals("")){
+                    Toast.makeText(LoginActivity.this, "Favor de ingresar usuario y contraseña",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    singIn(email, password);
+                }
+            }
+        });
+
+      //  this.singIn("lourdesvega21@hotmail.com","123456");
     }
 
     @Override
@@ -57,21 +80,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Correcto", "signInWithEmail:success");
-                            System.out.println("Correcto!!!!!!!!!!!!!!!!!!!!!!!!----------------");
+                            Toast.makeText(LoginActivity.this, "¡Bienvenido!",
+                                    Toast.LENGTH_SHORT).show();
+
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("Error", "signInWithEmail:failure", task.getException());
-                            System.out.println("Error!!!!!!!!!!!!!!!1--------------------");
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrecta.",
                                     Toast.LENGTH_SHORT).show();
+                            edtpass.setText("");
                             updateUI(null);
                         }
-
-                        // ...
                     }
                 });
 
