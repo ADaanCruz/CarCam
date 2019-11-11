@@ -6,15 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_direction"
+    <WebView
+        android:id="@+id/wv_camera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </WebView>
+
+
+    <Button
+        android:id="@+id/btn-left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_direction"
-        android:textSize="36sp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginBottom="44dp"
+        android:text="@string/btn_left"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btn-right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        android:text="@string/btn_right"
+        app:layout_constraintBottom_toBottomOf="@+id/btn-left"
+        app:layout_constraintStart_toEndOf="@+id/btn-left"
+        app:layout_constraintTop_toTopOf="@+id/btn-left" />
+    <Button
+        android:id="@+id/btn-ahead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="20dp"
+        android:layout_x="99dp"
+        android:layout_y="195dp"
+        android:text="@string/btn_ahead"
+        app:layout_constraintBottom_toTopOf="@+id/btn-back"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/btn-back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn-ahead"
+        app:layout_constraintStart_toStartOf="@+id/btn-ahead" />
 </androidx.constraintlayout.widget.ConstraintLayout>
