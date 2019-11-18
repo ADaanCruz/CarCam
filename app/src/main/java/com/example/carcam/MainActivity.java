@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bluetooth.ConnectedThread;
 import com.example.carcam.sensor.RotationVector;
+import com.example.login.LoginActivity;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -78,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (getSupportActionBar() != null)

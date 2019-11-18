@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.bluetooth.Bluetooth;
 import com.example.bluetooth.MainInterface;
+import com.example.login.LoginActivity;
 
 import java.io.IOException;
 import java.util.Set;
@@ -45,6 +46,8 @@ public class ListBluetooth extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intentLogin = new Intent(this, LoginActivity.class);
+        startActivity(intentLogin);
         setContentView(com.example.bluetooth.R.layout.activity_list_bluetooth);
 
         bluetooth = new Bluetooth();
