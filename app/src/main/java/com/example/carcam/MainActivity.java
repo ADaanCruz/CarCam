@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnBack;
     Button btnLeft;
     Button btnRight;
+    Button btnStop;
 
     /*******************************/
     /********** Camera*******************/
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         btnLeft = findViewById(R.id.btn_left);
         btnRight = findViewById(R.id.btn_right);
+        btnStop = findViewById(R.id.btn_stop);
 
         btnAhead.setOnClickListener((view) ->
                 MyConexionBT.write("1")
@@ -188,6 +190,11 @@ public class MainActivity extends AppCompatActivity {
         );
         btnRight.setOnClickListener((view) ->
                 MyConexionBT.write("4")
+        );
+
+
+        btnStop.setOnClickListener((view) ->
+                MyConexionBT.write("0")
         );
     }
 

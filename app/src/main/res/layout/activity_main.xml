@@ -6,18 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <WebView
         android:id="@+id/wv_camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
 
     </WebView>
-
 
     <Button
         android:id="@+id/btn-left"
@@ -52,13 +54,23 @@
         android:text="@string/btn_ahead"
         app:layout_constraintBottom_toTopOf="@+id/btn-back"
         app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/btn-back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        android:text="Button"
+        android:text="ATRAS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn-ahead"
         app:layout_constraintStart_toStartOf="@+id/btn-ahead" />
+
+    <Button
+        android:id="@+id/btn-stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PARAR"
+        app:layout_constraintEnd_toEndOf="@+id/btn-ahead"
+        app:layout_constraintStart_toStartOf="@+id/btn-ahead"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
