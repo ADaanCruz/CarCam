@@ -119,4 +119,11 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(@Nullable FirebaseUser user) {
         // No-op
     }
+
+    @Override
+    public void onBackPressed() {
+
+
+
+    }
 }

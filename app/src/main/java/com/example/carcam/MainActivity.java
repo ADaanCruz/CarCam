@@ -115,11 +115,15 @@ public class MainActivity extends AppCompatActivity {
                         orientations = sensor.getOrientations(event);
 
                         if (orientations[1] <= -22) {
-                            direction.setText("Right");
+                            //  direction.setText("Right");
+                            MyConexionBT.write("4");
+
                         } else if (orientations[1] >= 22) {
-                            direction.setText("Left");
+                            //  direction.setText("Left");
+                            MyConexionBT.write("3");
+
                         } else {
-                            direction.setText("Ahead");
+                            //  direction.setText("Ahead");
                         }
                     }
                 }
@@ -213,8 +217,6 @@ public class MainActivity extends AppCompatActivity {
         btnRight.setOnClickListener((view) ->
                 MyConexionBT.write("4")
         );
-
-
         btnStop.setOnClickListener((view) ->
                 MyConexionBT.write("0")
         );
