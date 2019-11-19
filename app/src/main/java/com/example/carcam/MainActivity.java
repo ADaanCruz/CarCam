@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bluetooth.ConnectedThread;
@@ -36,11 +38,13 @@ import static com.example.carcam.R.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    /********** Sensor *******************/
     public SensorManager sensorManager;
-    public RotationVector rotationVector;
-    public SensorEventListener sensorEventListener;
-    public float[] orientations = new float[3];
+    public RotationVector sensor;
+    public SensorEventListener sensorListener;
+    public boolean correctSensor = false;
 
+    public float[] orientations = new float[3];
     public TextView direction;
 
     public static Intent intentListBluetooth = null;
@@ -63,15 +67,13 @@ public class MainActivity extends AppCompatActivity {
         return device.createInsecureRfcommSocketToServiceRecord(BTMODULEUUID);
     }
 
-    /*********** ************/
-
     /********** Button control**************/
     Button btnAhead;
     Button btnBack;
     Button btnLeft;
     Button btnRight;
+    Button btnStop;
 
-    /*******************************/
     /********** Camera*******************/
     WebView camera;
 
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
@@ -93,30 +95,9 @@ public class MainActivity extends AppCompatActivity {
 //            finish();
 //        }
         //direction = findViewById(R.id.tv_direction);
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        rotationVector = new RotationVector(sensorManager);
 
-        sensorEventListener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {
-                orientations = rotationVector.getOrientations(sensorEvent);
-
-                if (Math.abs(orientations[2]) < 75) {
-                    direction.setText(R.string.lbl_right);
-                } else if (Math.abs(orientations[2]) > 105) {
-                    direction.setText(R.string.lbl_left);
-                } else {
-                    direction.setText("");
-                }
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-
-            }
-        };
-
-        sensorManager.registerListener(sensorEventListener, rotationVector.getSensor(), SensorManager.SENSOR_DELAY_NORMAL);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
+            correctSensor = this.sensorConfiguration();
         this.btnSetAction();
         this.camera();
 
@@ -125,8 +106,51 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        if (correctSensor) {
+            sensorListener = new SensorEventListener() {
+                @Override
+                public void onSensorChanged(SensorEvent event) {
+                    if (event.sensor.getType() == Sensor.TYPE_GAME_ROTATION_VECTOR) {
+                        orientations = sensor.getOrientations(event);
+
+                        if (orientations[1] <= -22) {
+                            //  direction.setText("Right");
+                            MyConexionBT.write("4");
+
+                        } else if (orientations[1] >= 22) {
+                            //  direction.setText("Left");
+                            MyConexionBT.write("3");
+
+                        } else {
+                            //  direction.setText("Ahead");
+                        }
+                    }
+                }
+
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+                }
+            };
+
+            sensorManager.registerListener(sensorListener, sensor.getSensor(), SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
         this.conection();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public boolean sensorConfiguration() {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        if (sensorManager == null) {
+            Log.i("S/Manager", "The manager is null");
+            return false;
+        } else {
+            sensor = new RotationVector(sensorManager);
+            return true;
+        }
     }
 
     public void conection() {
@@ -179,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btn_back);
         btnLeft = findViewById(R.id.btn_left);
         btnRight = findViewById(R.id.btn_right);
+        btnStop = findViewById(R.id.btn_stop);
 
         btnAhead.setOnClickListener((view) ->
                 MyConexionBT.write("1")
@@ -191,6 +216,9 @@ public class MainActivity extends AppCompatActivity {
         );
         btnRight.setOnClickListener((view) ->
                 MyConexionBT.write("4")
+        );
+        btnStop.setOnClickListener((view) ->
+                MyConexionBT.write("0")
         );
     }
 
